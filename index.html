@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS 1</title>
+    <style>
+        body {
+            background-color: chocolate;
+        }
+
+        .sum input {
+            border-radius: 0%;
+
+        }
+
+        .main {
+            margin: 5px;
+            margin-top: 100px;
+            margin-left: 35%;
+        }
+
+        .main input {
+            border-radius: 5px;
+            height: 25px;
+            width: 150px;
+        }
+
+        .main select {
+            border-radius: 5px;
+        }
+
+        .sum {
+            margin: 5px;
+        }
+
+        .sum1 {
+            margin: 5px;
+        }
+
+        .sum1 input {
+            margin-left: 90px;
+        }
+        label{
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="margin-left: 30%;">Hello! Can you enter your valuta?</h1>
+    <div class="main">
+        <div class="sum">
+            <form>
+                <label>
+                    Введите сумму:
+                </label>
+                <input type="number" id="cash" oninput="calculator()">
+                <select id="valutaOf" onchange="calculator()">
+                    <option value="KZT">KZT</option>
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                </select>
+            </form>
+        </div>
+        <div class="sum1">
+            <label>KZT:</label>
+            <input type="text" id="KZT"><label> tenge</label>
+        </div>
+        <div class="sum1">
+            <label>USD:</label>
+            <input type="text" id="USD"> <label> dollar</label>
+        </div>
+        <div class="sum1">
+            <label>EUR:</label>
+            <input type="text" id="EUR"> <label> euro</label>
+        </div>
+    </div>
+    <script>
+        function calculator() {
+            let cashNum = cash.value;
+            console.log(cashNum);
+
+            let val = valutaOf.value;
+            console.log(val);
+
+            let valutas = [
+                { KZT: { USD: (cashNum / 450).toFixed(2), EUR: (cashNum / 500).toFixed(2) } },
+                { USD: { KZT: (cashNum * 450).toFixed(2), EUR: (cashNum * 2).toFixed(2) } },
+                { EUR: { KZT: (cashNum * 500).toFixed(2), USD: (cashNum / 2).toFixed(2) } },
+            ]
+
+            if (val === "KZT") {
+                KZT.value = '-';
+                USD.value = valutas[0].KZT.USD;
+                EUR.value = valutas[0].KZT.EUR;
+            } else if (val === "USD") {
+                KZT.value = valutas[1].USD.KZT;
+                USD.value = "-";
+                EUR.value = valutas[1].USD.EUR;
+            } else if (val === "EUR") {
+                KZT.value = valutas[2].EUR.KZT;
+                USD.value = valutas[2].EUR.USD;
+                EUR.value = '-';
+            }
+        }
+
+    </script>
+</body>
+
+</html>
